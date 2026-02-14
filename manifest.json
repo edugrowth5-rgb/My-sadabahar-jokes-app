@@ -1,0 +1,15 @@
+{
+  "name": "Hanson aur Hansaon",
+  "short_name": "Hanson",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f1f2f6",
+  "theme_color": "#4a90e2",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1653/1653630.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
