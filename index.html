@@ -45,6 +45,56 @@
         }
         .close-btn { position: fixed; top: 15px; right: 15px; width: 45px; height: 45px; background: var(--accent); color: white; border: none; border-radius: 50%; font-size: 28px; cursor: pointer; z-index: 600; display: flex; align-items: center; justify-content: center; }
         .joke-card { background: white; color: #333; padding: 22px; border-radius: 18px; margin-bottom: 20px; border-left: 8px solid var(--main-blue); font-size: 18px; line-height: 1.6; box-shadow: 0 8px 20px rgba(0,0,0,0.1); white-space: pre-wrap; width: 100%; max-width: 500px; margin: 0 auto 20px auto; }
+        .share-btn {
+    background: #25D366; /* WhatsApp Green */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.share-btn:active { transform: scale(0.95); }
+
+        /* Dark Mode Colors */
+        body.dark-mode { background: #1a1a1a; color: #f1f2f6; }
+        .dark-mode .header { background: #2f3542; color: white; }
+        .dark-mode .tile { background: #2f3542; border-color: #444; color: white; }
+        .dark-mode .joke-card { background: #2f3542; color: #f1f2f6; border-left-color: var(--accent); }
+        .dark-mode #jokesPage { background-color: #121212; background-image: none; }
+        
+        /* Dark Mode Switch Button Style */
+        #darkModeToggle {
+            position: fixed; bottom: 20px; right: 20px; 
+            width: 50px; height: 50px; border-radius: 50%;
+            background: #2f3542; color: white; border: none;
+            font-size: 24px; cursor: pointer; z-index: 2000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+/* Ye dark mode ke liye hai */
+.dark-mode .share-btn {
+    background: #00e676 !important; /* Zyada chamakdar hara rang */
+    color: #000 !important;        /* Button ke andar ka text kaala */
+}
+
+/* Heading ko hamesha bright rakhne ke liye */
+#catTitle {
+    opacity: 1 !important;
+    background: white; /* Light mode mein white */
+    color: black;
+}
+
+.dark-mode #catTitle {
+    background: #4a90e2 !important; /* Dark mode mein blue background */
+    color: white !important;        /* Safed text */
+}
+
+
     </style>
 </head>
 <body>
@@ -180,7 +230,7 @@
             ],
             miser: [
                 "कंजूस: एक केला कितने का?\nदुकानदार: 5 रुपये का।\nकंजूस: 2 में दे दो।\nदुकानदार: इतने में तो सिर्फ छिलका मिलेगा।\nकंजूस: ये लो 3 रुपये और केला मुझे दे दो, छिलका तुम रख लो!",
-                "कंजूस मर रहा था। उसने बीवी से पूछा: चिंटू कहाँ है? बीवी: यहीं। कंजूस: पिंटू कहाँ है? बीवी: यहीं। कंजूस: तो सालो, बाहर वाले कमरे का पंखा क्यों चल रहा है!",
+                "कंजूस मर रहा था। उसने बीवी से पूछा: चिंटू कहाँ है? \nबीवी: यहीं।\n कंजूस: पिंटू कहाँ है?\n बीवी: यहीं। \nकंजूस: तो सालो, बाहर वाले कमरे का पंखा क्यों चल रहा है!",
                 "कंजूस ने अपने बेटे को पीटा क्योंकि उसने चप्पल पहनकर दौड़ लगाई थी।\nबेटा: पापा क्यों मार रहे हो?\nकंजूस: गधे, चप्पल घिस जाती है, नंगे पाँव दौड़ता तो कम से कम पैर ही घिसते, मरहम तो मुफ्त में मिल जाता है!",
                 "कंजूस: डॉक्टर साहब, मेरा इलाज फ्री में कर दो।\nडॉक्टर: क्यों?\nकंजूस: क्योंकि मैं आपके क्लिनिक के बाहर 'नो पार्किंग' में गाड़ी खड़ी करके आया हूँ, जुर्माना वैसे ही लग जाएगा!",
 "कंजूस का बेटा: पापा, 50 रुपये दो, मेला देखने जाना है।\nकंजूस: ले ये 10 रुपये, छत पर खड़ा हो जा, सब कुछ दूर से ही दिख जाएगा!",
@@ -195,20 +245,67 @@
         }
 
         function openJokes(title, catKey) {
-            document.getElementById('jokesPage').style.display = 'block';
-            document.getElementById('catTitle').innerText = title;
-            const listDiv = document.getElementById('jokesList');
-            listDiv.innerHTML = "";
-            jokesData[catKey].forEach(joke => {
-                const card = document.createElement('div');
-                card.className = 'joke-card';
-                card.innerText = joke;
-                listDiv.appendChild(card);
-            });
-            document.getElementById('jokesPage').scrollTop = 0;
-        }
+    document.getElementById('jokesPage').style.display = 'block';
+    document.getElementById('catTitle').innerText = title;
+    const listDiv = document.getElementById('jokesList');
+    listDiv.innerHTML = "";
+    
+    jokesData[catKey].forEach(joke => {
+        const card = document.createElement('div');
+        card.className = 'joke-card';
+        
+        // Joke Text
+        const textNode = document.createElement('div');
+        textNode.innerText = joke;
+        card.appendChild(textNode);
+        
+        // Share Button
+        const sBtn = document.createElement('button');
+        sBtn.className = 'share-btn';
+        sBtn.innerHTML = '📤 WhatsApp Share';
+        sBtn.onclick = () => shareJoke(joke);
+        card.appendChild(sBtn);
+        
+        listDiv.appendChild(card);
+    });
+    document.getElementById('jokesPage').scrollTop = 0;
+}
+
 
         function closeJokes() { document.getElementById('jokesPage').style.display = 'none'; }
+        
+        function shareJoke(text) {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Hanson aur Hansaon',
+            text: text + "\n\n(Shared via Hanson aur Hansaon App) 😂",
+            url: window.location.href
+        }).catch((error) => console.log('Error sharing', error));
+    } else {
+        // Agar browser support nahi karta (Jaise Desktop Chrome)
+        alert("Share feature is only supported on Mobile Browsers.");
+    }
+}
+
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            
+            const btn = document.getElementById('darkModeToggle');
+            if(body.classList.contains('dark-mode')) {
+                btn.innerText = '☀️'; // Sun icon for light mode
+                btn.style.background = '#f1f2f6';
+                btn.style.color = '#2f3542';
+            } else {
+                btn.innerText = '🌙'; // Moon icon for dark mode
+                btn.style.background = '#2f3542';
+                btn.style.color = 'white';
+            }
+        }
+
     </script>
+    
+        <button id="darkModeToggle" onclick="toggleDarkMode()">🌙</button>
+
 </body>
 </html>
