@@ -3,7 +3,7 @@ const assets = [
   './',
   './index.html',
   './manifest.json',
-  'https://cdn-icons-png.flaticon.com/512/1023/1023656.png'
+  'IMG-20260215-WA0001.jpg'
 ];
 
 // Install Service Worker
