@@ -1,13 +1,19 @@
 {
-  "name": "Sadabahar Jokes",
+  "name": "Hanson aur Hansaon - Hindi Jokes",
   "short_name": "Jokes",
+  "description": "Mazedaar Hindi Jokes ka pitara",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#f1f2f6",
+  "background_color": "#ffffff",
   "theme_color": "#4a90e2",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/1653/1653630.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/1023/1023656.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1023/1023656.png",
       "sizes": "512x512",
       "type": "image/png"
     }
