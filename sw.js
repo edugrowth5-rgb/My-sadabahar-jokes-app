@@ -3,7 +3,7 @@ const assets = [
   './',
   './index.html',
   './manifest.json',
-  'IMG-20260215-WA0001.jpg'
+  '1000047724-removebg-preview.png'
 ];
 
 // Install Service Worker
